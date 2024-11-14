@@ -23,7 +23,7 @@ public class ProductService {
 
     public int deleteOldProducts() {
         int deletedCount = 0;
-        String query = "DELETE FROM Products " +
+        String query = "DELETE FROM Product " +
 
                 "WHERE ProductId NOT IN (" +
 

@@ -8,12 +8,12 @@ public class CategoryService {
     public List<Category> getTopParentCategories() {
         List<Category> categories = new ArrayList<>();
 
-        String query = "SELECT c1.Title, COUNT(c2.Id) AS ChildCount " +
-                       "FROM Categories c1 " +
-                       "LEFT JOIN Categories c2 ON c2.ParentCategoryId = c1.Id " +
-                       "WHERE c1.ParentCategoryId IS NULL " +
-                       "GROUP BY c1.Id, c1.Title " +
-                       "ORDER BY c1.Title ASC";
+        String query = "SELECT c1.CategoryName, COUNT(c2.CategoryID) AS ChildCount " +
+                       "FROM Category c1 " +
+                       "LEFT JOIN Category c2 ON c2.ParentCategoryID = c1.CategoryID " +
+                       "WHERE c1.ParentCategoryID IS NULL " +
+                       "GROUP BY c1.CategoryID, c1.CategoryName " +
+                       "ORDER BY c1.CategoryName ASC";
 
 
           try (Connection conn = DatabaseHelper.getConnection();
@@ -21,7 +21,7 @@ public class CategoryService {
                ResultSet rs = ps.executeQuery();
                while(rs.next()){
                 Category category = new Category();
-                category.setTitle(rs.getString("Title"));
+                category.setTitle(rs.getString("CategoryName"));
                 category.setChildCount(rs.getInt("ChildCount"));
                 categories.add(category);
                }

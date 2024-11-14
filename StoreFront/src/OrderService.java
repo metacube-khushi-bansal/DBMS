@@ -5,10 +5,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class OrderService {
-    
+
     public List<Order> getShippedOrders(int userId) {
         List<Order> orders = new ArrayList<>();
-        String query = "SELECT O.OrderID, O.OrderDate, O.TotalAmount FROM Order O INNER JOIN OrderItem OI  ON O.OrderID = OI.OrderID WHERE O.UserID = ? AND OI.Status = 'Shipped'  ORDER BY O.OrderDate ASC";
+        String query = "SELECT O.OrderID, O.OrderDate, O.TotalAmount FROM `Order` O INNER JOIN OrderItem OI  ON O.OrderID = OI.OrderID WHERE O.UserID = ? AND OI.Status = 'Shipped'  ORDER BY O.OrderDate ASC";
 
         try(Connection conn = DatabaseHelper.getConnection() ;
          PreparedStatement  ps = conn.prepareStatement(query)) {
